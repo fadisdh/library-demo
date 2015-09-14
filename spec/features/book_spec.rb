@@ -32,4 +32,3 @@ RSpec.describe "Book Features", type: :feature do
     expect(page).to have_content "winner of the Newbery Medal in 1963"
   end
 end
-

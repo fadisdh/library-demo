@@ -4,7 +4,7 @@
   <%= image_tag @book.cover_url, alt: @book.title %>
 </p>
 
-<h2><%= @book.title %></h2>
+<h2><%= link_to @book.title, @book %></h2>
 
 <p>
   <strong><%= "Author".pluralize(@book.authors.count) %>:</strong>
