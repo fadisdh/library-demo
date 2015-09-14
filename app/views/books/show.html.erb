@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag @book.cover_url, alt: @book.title %>
+</p>
+
+<h2><%= @book.title %></h2>
+
+<p>
+  <strong><%= "Author".pluralize(@book.authors.count) %>:</strong>
+  <%= @book.authors.map { |author| link_to(author.name, author) }.join(", ").html_safe %>
+</p>
+
+<p>
+  <strong>Isbn:</strong>
+  <%= @book.isbn %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= simple_format @book.description %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @book.publisher %>
+</p>
+
+<p>
+  <strong>Published on:</strong>
+  <%= @book.published_on %>
+</p>
+
+<%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Back', books_path %>

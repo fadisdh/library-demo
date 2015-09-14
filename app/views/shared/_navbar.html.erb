@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#library_navbar_collapse" aria-expanded="false">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Library", root_path, class: "navbar-brand" %>
+    </div>
+
+    <div class="collapse navbar-collapse" id="library_navbar_collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <%= nav_link_to books_path do %>
+          <span class="glyphicon glyphicon-book"></span> Books
+        <% end %>
+        <%= nav_link_to authors_path do %>
+          <span class="glyphicon glyphicon-user"></span> Authors
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
