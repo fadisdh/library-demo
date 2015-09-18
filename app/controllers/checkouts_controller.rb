@@ -2,7 +2,7 @@ class CheckoutsController < ApplicationController
 
 	def create
 		@book = Book.find(params[:book_id])
-		non_returned_books_count = Checkout.where(returned: false).count;
+		non_returned_books_count = @book.checkouts.where(returned: false).count;
 
 		if(non_returned_books_count == 0) then
 			@checkout = @book.checkouts.create(checkout_params)
