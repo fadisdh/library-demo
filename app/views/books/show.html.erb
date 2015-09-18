@@ -1,4 +1,16 @@
 <p id="notice"><%= notice %></p>
+<% if flash[:checkout_errors] and flash[:checkout_errors].any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(flash[:checkout_errors].count, "error") %> prohibited this checkout from being saved:</h2>
+
+    <ul>
+    <% flash[:checkout_errors].each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
 <p>
   <%= image_tag @book.cover_url, alt: @book.title %>
@@ -33,3 +45,51 @@
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
+
+
+<h1>Checkouts</h1>
+
+<%= form_for([@book, @book.checkouts.build]) do |f| %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Checkout Date</th>
+      <th>Return Date</th>
+      <th>Returned</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @book.checkouts.all.each do |checkout| %>
+      <tr>
+        <td><%= checkout.name %></td>
+        <td><% 
+          if(checkout.checkout_date.respond_to?(:strftime)) then %> 
+            <%= checkout.checkout_date.strftime('%d %b, %Y %I:%M:%S %p') %>
+          <% end %>
+        </td>
+        <td><%= checkout.return_date %></td>
+        <td><%= link_to (checkout.returned ? 'YES' : 'NO'), [@book, checkout, returned: !checkout.returned], :method => :put, :title => "Toogle to #{ checkout.returned ? 'NO' : 'YES' }" %></td>
+        <td><%= link_to 'DEL', [@book, checkout], :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+      <tr>
+        <td>
+          <%= f.text_field :name, :placeholder => 'Full Name' %>
+        </td>
+        <td>
+          <%= f.text_field :checkout_date, :placeholder => 'Checkout Date' %>
+        </td>
+        <td>
+          <%= f.text_field :return_date, :placeholder => 'Return Date' %>
+        </td>
+        <td colspan="2">
+          <%= f.hidden_field :returned, value: false %>
+          <%= f.submit %>
+        </td>
+      </tr>
+  </tbody>
+</table>
+<% end %>
