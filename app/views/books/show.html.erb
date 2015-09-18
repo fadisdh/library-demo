@@ -13,7 +13,8 @@
 
 
 <p>
-  <%= image_tag @book.cover_url, alt: @book.title %>
+  <%#image_tag @book.cover_url, alt: @book.title %>
+  <%= image_tag @book.cover.url(:large), alt: @book.title %>
 </p>
 
 <h2><%= link_to @book.title, @book %></h2>

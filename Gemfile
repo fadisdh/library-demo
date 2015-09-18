@@ -3,10 +3,13 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
+gem 'sqlite3'
 #added for an issue with ruby 2.2 in windows env.
-gem 'sqlite3', '1.3.11.pr159'
+#gem 'sqlite3', '1.3.11.pr159'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+# Image Proccessing Gem
+gem "paperclip", "~> 4.3"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
