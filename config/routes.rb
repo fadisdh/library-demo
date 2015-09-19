@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/autocomplete/authors', to: 'authors#autocomplete', as: 'autocomplete_authors'
+
   resources :authors
   resources :books do
     resources :checkouts

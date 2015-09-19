@@ -61,6 +61,17 @@ class AuthorsController < ApplicationController
     end
   end
 
+  #GET authors/autocomplete
+  def autocomplete
+    @authors = Author.where("first_name LIKE ? OR last_name LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    @json = []
+    @authors.each do |author|
+      @json.push({value: author.id, text: author.name})
+    end
+
+    render json: @json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_author
