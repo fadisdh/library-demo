@@ -81,10 +81,10 @@
           <%= f.text_field :name, :placeholder => 'Full Name' %>
         </td>
         <td>
-          <%= f.text_field :checkout_date, :placeholder => 'Checkout Date' %>
+          <%= f.text_field :checkout_date, :placeholder => 'Checkout Date', :class => 'datepicker' %>
         </td>
         <td>
-          <%= f.text_field :return_date, :placeholder => 'Return Date' %>
+          <%= f.text_field :return_date, :placeholder => 'Return Date', :class => 'datepicker' %>
         </td>
         <td colspan="2">
           <%= f.hidden_field :returned, value: false %>
