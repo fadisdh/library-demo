@@ -1,6 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if(notice) %>
+  <p id="notice" class="alert alert-warning"><%= notice %></p>
+<% end %>
 <% if flash[:checkout_errors] and flash[:checkout_errors].any? %>
-  <div id="error_explanation">
+  <div id="error_explanation" class="alert alert-danger">
     <h2><%= pluralize(flash[:checkout_errors].count, "error") %> prohibited this checkout from being saved:</h2>
 
     <ul>
@@ -14,7 +16,14 @@
 
 <p>
   <%#image_tag @book.cover_url, alt: @book.title %>
-  <%= image_tag @book.cover.url(:large), alt: @book.title %>
+  <div class="book-img inline">
+    <%= image_tag @book.cover.url(:large), alt: @book.title %>
+    <% if(@book.checkouts.where(returned: false).empty?) %>
+      <%= image_tag 'available.png', alt: 'Available', class: 'book-tag big' %>
+    <% else %>
+      <%= image_tag 'not-available.png', alt: 'Not Available', class: 'book-tag big' %>
+    <% end %>
+  </div>
 </p>
 
 <h2><%= link_to @book.title, @book %></h2>
@@ -72,8 +81,20 @@
           <% end %>
         </td>
         <td><%= checkout.return_date.strftime('%d %b, %Y %I:%M %p') %></td>
-        <td><%= link_to (checkout.returned ? 'YES' : 'NO'), [@book, checkout, returned: !checkout.returned], :method => :put, :title => "Toogle to #{ checkout.returned ? 'NO' : 'YES' }" %></td>
-        <td><%= link_to 'DEL', [@book, checkout], :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to [@book, checkout, returned: !checkout.returned], :method => :put, :title => "Toogle to #{ checkout.returned ? 'RETURENED' : 'NOT RETURENED' }" do %>
+            <% if(checkout.returned) %>
+              <span class="glyphicon glyphicon-ok"></span> 
+            <% else %>
+               <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to [@book, checkout], :method => :delete, title: 'delete', data: { confirm: 'Are you sure?' } do %>
+            <span class="glyphicon glyphicon-trash"></span> 
+          <% end %>
+        </td>
       </tr>
     <% end %>
       <tr>

@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'New Book', new_book_path, class: "btn btn-primary btn-large pull-right" %>
+<form action="" class="form-search">
+  <div class="input-group pull-right">
+    <input type="search" name="search" value="<%= params[:search] %>" class="form-control" placeholder="Search for Books ...">  
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </span>
+  </div>
+</form>
 
 <h1>Books</h1>
 
@@ -18,18 +26,25 @@
     <% @books.each do |book| %>
       <tr>
         <td>
-          <%= link_to image_tag(book.cover.url(:thumb), alt: book.title, class: "thumbnail-sm"), book, class: "thumbnail" %>
+          <div class="book-img">
+            <%= link_to image_tag(book.cover.url(:thumb), alt: book.title, class: "thumbnail-sm"), book, class: "thumbnail" %>
+            <% if(book.checkouts.where(returned: false).empty?) %>
+              <%= image_tag 'available.png', alt: 'Available', class: 'book-tag' %>
+            <% else %>
+              <%= image_tag 'not-available.png', alt: 'Not Available', class: 'book-tag' %>
+            <% end %>
+          </div>
         </td>
         <td><%= link_to book.title, book %></td>
         <td><%= book.publisher %></td>
         <td class="centered">
           <%= link_to edit_book_path(book) do %>
-            <span class="glyphicon glyphicon-pencil"> Edit</span>
+            <span class="glyphicon glyphicon-pencil"></span> Edit
           <% end %>
         </td>
         <td class="centered">
           <%= link_to book, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <span class="glyphicon glyphicon-trash"> Destroy</span>
+            <span class="glyphicon glyphicon-trash"></span> Destroy
           <% end %>
         </td>
       </tr>

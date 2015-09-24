@@ -35,3 +35,45 @@ ul.TokensContainer{
 .datetime-wrapper{
 	position: relative;
 }
+
+.form-search .input-group{
+	display: inline-block;
+	margin-right: 20px;
+	width: auto;
+}
+
+.form-search .input-group-addon, .input-group-btn{
+	width: auto;
+}
+
+.form-search .input-group .form-control{
+	display: inline-block;
+	width: 200px;
+	webkit-transition: width 200ms ease-in;
+	moz-transition: width 200ms ease-in;
+	transition: width 200ms ease-in;
+}
+
+.form-search .form-control:focus{
+	width: 250px;
+}
+
+/* Book Image */
+.book-img{
+	position: relative;
+}
+
+.book-img.inline{
+	display: inline-block;
+}
+
+.book-tag{
+	position: absolute;
+	top:0;
+	right:0;
+	width: 60px;
+}
+
+.book-tag.big{
+	width: 100px;
+}

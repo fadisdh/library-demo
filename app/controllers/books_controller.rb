@@ -4,7 +4,11 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if(params[:search])
+      @books = Book.includes(:checkouts).where("title LIKE ? OR publisher LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    else
+      @books = Book.includes(:checkouts).all
+    end
   end
 
   # GET /books/1

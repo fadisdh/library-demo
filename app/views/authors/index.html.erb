@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'New Author', new_author_path, class: "btn btn-primary btn-large pull-right" %>
+<form action="" class="form-search">
+  <div class="input-group pull-right">
+    <input type="search" name="search" value="<%= params[:search] %>" class="form-control" placeholder="Search for Authors ...">  
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </span>
+  </div>
+</form>
 
 <h1>Authors</h1>
 
@@ -20,12 +28,12 @@
         <td class="centered"><%= author.books.count %></td>
         <td class="centered">
           <%= link_to edit_author_path(author) do %>
-            <span class="glyphicon glyphicon-pencil"> Edit</span>
+            <span class="glyphicon glyphicon-pencil"></span> Edit
           <% end %>
         </td>
         <td class="centered">
           <%= link_to author, method: :delete, data: { confirm: 'Are you sure?' } do %>
-            <span class="glyphicon glyphicon-trash"> Destroy</span>
+            <span class="glyphicon glyphicon-trash"></span> Destroy
           <% end %>
         </td>
       </tr>

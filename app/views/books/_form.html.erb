@@ -14,7 +14,7 @@ $(function(){
 
 <%= form_for(@book, html: { multipart: true }) do |f| %>
   <% if @book.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
       <ul>
@@ -76,7 +76,6 @@ $(function(){
     <div class="form-group col-sm-4">
       Authors<br>
       <select name="book[author_ids][]" id="autocomplete" data-url="<%= autocomplete_authors_path %>" data-value='<%= @authors.to_json %>' multiple></select>
-      <%# f.text_field :cover_url, class: "form-control" %>
     </div>
   </div>
 
