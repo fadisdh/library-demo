@@ -51,7 +51,7 @@
 <h1>Checkouts</h1>
 
 <%= form_for([@book, @book.checkouts.build]) do |f| %>
-<table class="table">
+<table class="table checkouts">
   <thead>
     <tr>
       <th>Name</th>
@@ -68,10 +68,10 @@
         <td><%= checkout.name %></td>
         <td><% 
           if(checkout.checkout_date.respond_to?(:strftime)) then %> 
-            <%= checkout.checkout_date.strftime('%d %b, %Y %I:%M:%S %p') %>
+            <%= checkout.checkout_date.strftime('%d %b, %Y %I:%M %p') %>
           <% end %>
         </td>
-        <td><%= checkout.return_date %></td>
+        <td><%= checkout.return_date.strftime('%d %b, %Y %I:%M %p') %></td>
         <td><%= link_to (checkout.returned ? 'YES' : 'NO'), [@book, checkout, returned: !checkout.returned], :method => :put, :title => "Toogle to #{ checkout.returned ? 'NO' : 'YES' }" %></td>
         <td><%= link_to 'DEL', [@book, checkout], :method => :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -81,10 +81,10 @@
           <%= f.text_field :name, :placeholder => 'Full Name' %>
         </td>
         <td>
-          <%= f.text_field :checkout_date, :placeholder => 'Checkout Date', :class => 'datepicker' %>
+          <div class="datetime-wrapper"><%= f.text_field :checkout_date, :placeholder => 'Checkout Date', :class => 'datetimepicker' %></div>
         </td>
         <td>
-          <%= f.text_field :return_date, :placeholder => 'Return Date', :class => 'datepicker' %>
+          <div class="datetime-wrapper"><%= f.text_field :return_date, :placeholder => 'Return Date', :class => 'datetimepicker' %></div>
         </td>
         <td colspan="2">
           <%= f.hidden_field :returned, value: false %>

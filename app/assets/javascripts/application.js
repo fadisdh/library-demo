@@ -14,12 +14,18 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require moment
 //= require bootstrap-datepicker
+//= require bootstrap-datetimepicker
 //= require_tree .
 
 ready = function() {
   $('.datepicker, .input-group.date').datepicker({
     format: "yyyy-mm-dd"
+  });
+
+  $('.datetimepicker, .input-group.datetime').datetimepicker({
+    format: "YYYY-MM-DD hh:mm A"
   });
 };
 
